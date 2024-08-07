@@ -10,11 +10,15 @@ import InvoiceDetails, {
 } from "./components/invoices/InvoiceDetails";
 import InvoiceEdit from "./components/invoices/InvoiceEdit";
 import LoginForm from "./pages/login/LoginForm";
+import UploadFile from "./components/Files/UploadFile";
 
 import {
   PrivateRoutes,
   loader as userLoader,
 } from "./pages/user/PrivateRoutes";
+
+import InvoiceCreate1 from "./components/invoices1/InvoiceCreate";
+// import { Upload } from "@mui/icons-material";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <PrivateRoutes isAuth={true} />,
+    element: <PrivateRoutes />,
     loader: userLoader,
     children: [
       {
@@ -38,14 +42,19 @@ const router = createBrowserRouter([
       },
       {
         path: "invoice/create",
-        element: <InvoiceCreate />,
+        element: <InvoiceCreate1 />,
       },
       {
         path: "invoice/edit/:id",
         element: <InvoiceEdit />,
         loader: invoiceData,
       },
+      { path: "upload/", element: <UploadFile /> },
     ],
+  },
+  {
+    path: "/invoices",
+    element: <InvoiceCreate1 />,
   },
 ]);
 

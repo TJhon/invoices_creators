@@ -7,6 +7,8 @@ import {
   ListItem,
   IconButton,
   Button,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -24,6 +26,7 @@ const payBase = {
 };
 import db from "../../appwrite/databases";
 import { useNavigate } from "react-router-dom";
+import { AddAPhoto } from "@mui/icons-material";
 const InvoiceCreate = () => {
   const [userName, setUserName] = useState("");
   const [typeInvoce, setTypeInvoce] = useState("Venta");
@@ -118,13 +121,15 @@ const InvoiceCreate = () => {
         value={userName}
         margin="normal"
       />
-      <TextField
-        onChange={(e) => setTypeInvoce(e.target.value)}
+
+      <Select
+        defaultValue="venta"
         fullWidth
-        label="Tipo de operacion"
-        margin="normal"
-        value={typeInvoce}
-      />
+        onChange={(e) => setTypeInvoce(e.target.value)}
+      >
+        <MenuItem value="venta">Venta</MenuItem>
+        <MenuItem value="compra">Compra</MenuItem>
+      </Select>
 
       <Typography variant="h4">Detalles de {typeInvoce}</Typography>
 
@@ -172,6 +177,9 @@ const InvoiceCreate = () => {
               }}
             />
             <Typography>{(item.item_price * item.item_qnt) | 0}</Typography>
+            <IconButton>
+              <AddAPhoto />
+            </IconButton>
             <IconButton onClick={() => removeItem(index)}>
               <DeleteIcon />
             </IconButton>
