@@ -2,7 +2,6 @@
 
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import db from "../../appwrite/databases";
-// import Table from "@mui/material/Table";
 import {
   TableContainer,
   Table,
@@ -14,14 +13,15 @@ import {
   Button,
 } from "@mui/material";
 
-export const loader = ({ params }) => {
-  const invoice_data = db.invoice_main.get(params.id);
-  return invoice_data;
+export const loader = async ({ params }) => {
+  const invoice = await db.invoice_main.get(params.id);
+
+  return { invoice };
 };
 
 const InvoiceDetails = () => {
   const { id } = useParams();
-  const invoice = useLoaderData();
+  const { invoice } = useLoaderData();
   const navigate = useNavigate();
   const items = invoice.invoice_items;
   const payments = invoice.invoice_payments;
@@ -38,7 +38,6 @@ const InvoiceDetails = () => {
               <TableCell align="center" colSpan={3}>
                 Details
               </TableCell>
-              {/* <TableCell align="right">Su</TableCell> */}
             </TableRow>
             <TableRow>
               <TableCell>Desc</TableCell>
@@ -74,11 +73,9 @@ const InvoiceDetails = () => {
               <TableCell align="center" colSpan={3}>
                 Pagos
               </TableCell>
-              {/* <TableCell align="right">Su</TableCell> */}
             </TableRow>
             <TableRow>
               <TableCell align="right">Fecha</TableCell>
-              {/* <TableCell>Desc</TableCell> */}
               <TableCell align="right">Forma de pago</TableCell>
               <TableCell align="right">Quien Recibio</TableCell>
               <TableCell align="right">Total</TableCell>
@@ -87,7 +84,6 @@ const InvoiceDetails = () => {
           <TableBody>
             {payments.map((payment) => (
               <TableRow key={payment.$id}>
-                {/* <TableCell>{payment.$updatedAt}</TableCell> */}
                 <TableCell align="right">{payment.$updatedAt}</TableCell>
                 <TableCell align="right">{payment.how_payed}</TableCell>
                 <TableCell align="right">{payment.who_received}</TableCell>

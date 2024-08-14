@@ -1,17 +1,27 @@
 import { Container, Typography, Button, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useInvoiceStore from "./store/store";
-import GeneralInfo from "./GeneralInfo";
-import ItemList from "./ItemList";
-import PaymentList from "./PaymentList";
+import GeneralInfo from "./part_invoices/GeneralInfo";
+import ItemList from "./part_invoices/ItemList";
+import PaymentList from "./part_invoices/PaymentList";
 import db, { uploadFilesGetURL } from "../../appwrite/databases";
 import { AddAPhoto } from "@mui/icons-material";
 import { useState } from "react";
 
-const InvoiceCreate1 = () => {
+function dropID(arrayObjects) {
+  const result = arrayObjects.map((obj) => {
+    const { id, ...rest } = obj;
+    return rest;
+  });
+  return result;
+}
+
+const InvoiceCreate = () => {
   const navigate = useNavigate();
   const { items, payments, userName, typeInvoice } = useInvoiceStore();
   const [invoicePhotos, setInvoicePhotos] = useState(null);
+  const { users } = useLoaderData();
+  console.log(users);
 
   const invoice_total = items.reduce(
     (sum, item) => sum + item.item_price * item.item_qnt,
@@ -21,26 +31,25 @@ const InvoiceCreate1 = () => {
     (sum, payment) => sum + payment.payment,
     0
   );
-  //   console.log(invoicePhotos);
 
   const handleSubmit = async () => {
     let items_photos;
     if (invoicePhotos) {
       items_photos = await uploadFilesGetURL(invoicePhotos);
     }
-    const newItems = items.map((item) => {
-      // eslint-disable-next-line no-unused-vars
-      const { id, ...rest } = item;
-      return rest;
-    });
+    const invoice_items = dropID(items);
+    const invoice_payments = dropID(payments);
+
+    console.log(payments);
     const payload = {
       user_name: userName,
       type_invoice: typeInvoice,
-      invoice_items: newItems,
-      invoice_payments: payments,
+      invoice_items,
+      invoice_payments,
       invoice_total,
       invoice_payment,
       items_photos,
+      users: { user_name: userName },
     };
     await db.invoice_main.create(payload);
     // console.log(response);
@@ -89,4 +98,4 @@ const InvoiceCreate1 = () => {
   );
 };
 
-export default InvoiceCreate1;
+export default InvoiceCreate;

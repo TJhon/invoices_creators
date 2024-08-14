@@ -16,14 +16,12 @@ import AddIcon from "@mui/icons-material/Add";
 
 const InvoiceEdit = () => {
   const { id } = useParams();
-  const invoice = useLoaderData();
-  //   console.log(invoice);
+  const { invoice } = useLoaderData();
   const { user_name, type_invoice, invoice_items, invoice_payments } = invoice;
   const [userName, setUserName] = useState(user_name);
   const [typeInvoce, setTypeInvoce] = useState(type_invoice);
   const [items, setItems] = useState(invoice_items);
   const [payments, setPayments] = useState(invoice_payments);
-  //   console.log(id);
 
   const invoice_total = items.reduce(
     (sum, item) => sum + item.item_price * item.item_qnt,
@@ -35,7 +33,7 @@ const InvoiceEdit = () => {
   );
   const handleItemChange = (index, field, value) => {
     const newItems = [...items];
-    // console.log(field);
+
     newItems[index][field] = field === "item_price" ? parseFloat(value) : value;
 
     newItems[index][field] = field == "item_qnt" ? parseFloat(value) : value;

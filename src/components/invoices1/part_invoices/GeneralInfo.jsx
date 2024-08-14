@@ -1,5 +1,6 @@
 import { TextField, Select, MenuItem, Typography } from "@mui/material";
-import useInvoiceStore from "./store/store";
+import useInvoiceStore from "../store/store";
+
 const GeneralInfo = () => {
   const { userName, typeInvoice, setUserName, setTypeInvoice } =
     useInvoiceStore();

@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Delete as DeleteIcon, Add as AddIcon } from "@mui/icons-material";
-import useInvoiceStore from "./store/store";
+import useInvoiceStore from "../store/store";
 
 const PaymentList = () => {
   const { payments, setPayments, addPayment, removePayment } =

@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Delete as DeleteIcon, Add as AddIcon } from "@mui/icons-material";
-import useInvoiceStore from "./store/store";
+import useInvoiceStore from "../store/store";
 
 const ItemList = () => {
   const { items, updateItem, addItem, removeItem, typeInvoice } =
@@ -22,7 +22,6 @@ const ItemList = () => {
       field === "item_price" || field === "item_qnt" ? parseFloat(value) : value
     );
   };
-  console.log(items);
 
   return (
     <>

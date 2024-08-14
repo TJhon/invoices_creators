@@ -8,11 +8,18 @@ export function loader() {
   return db.invoice_main.list([Query.orderDesc("$createdAt")]);
 }
 import { useUserL } from "../../pages/login/zustantd";
+import { account } from "../../appwrite/config";
 
 export const InvoicesList = () => {
   const invoices = useLoaderData().documents;
   const logout = useUserL((s) => s.logoutUser);
-  // console.log(invoices);
+  const { user } = useUserL();
+
+  const getuser = async () => {
+    const actual = await account.get();
+    console.log({ actual, user });
+  };
+  getuser();
   const navigate = useNavigate();
 
   const listInvoices = invoices.map((invoice) => (

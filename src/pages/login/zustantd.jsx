@@ -8,8 +8,9 @@ export const useUserL = create(
       return {
         user: null,
         loginUser: async (mail, pass) => {
-          const info = await account.createEmailPasswordSession(mail, pass);
-          set({ user: info });
+          await account.createEmailPasswordSession(mail, pass);
+          const user = await account.get();
+          set({ user });
         },
         logoutUser: () => {
           account.deleteSession("current");
@@ -17,6 +18,6 @@ export const useUserL = create(
         },
       };
     },
-    { name: "items_storage" }
+    { name: "actual_admin" }
   )
 );

@@ -3,7 +3,6 @@ import {
   InvoicesList,
   loader as invoicesLoader,
 } from "./components/invoices/InvoicesList";
-import InvoiceCreate from "./components/invoices/InvoiceCreate";
 
 import InvoiceDetails, {
   loader as invoiceData,
@@ -15,10 +14,9 @@ import UploadFile from "./components/Files/UploadFile";
 import {
   PrivateRoutes,
   loader as userLoader,
-} from "./pages/user/PrivateRoutes";
+} from "./pages/login/user/PrivateRoutes";
 
-import InvoiceCreate1 from "./components/invoices1/InvoiceCreate";
-// import { Upload } from "@mui/icons-material";
+import InvoiceCreate from "./components/invoices1/InvoiceCreate";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +40,8 @@ const router = createBrowserRouter([
       },
       {
         path: "invoice/create",
-        element: <InvoiceCreate1 />,
+        element: <InvoiceCreate />,
+        loader: invoiceData,
       },
       {
         path: "invoice/edit/:id",
@@ -51,10 +50,6 @@ const router = createBrowserRouter([
       },
       { path: "upload/", element: <UploadFile /> },
     ],
-  },
-  {
-    path: "/invoices",
-    element: <InvoiceCreate1 />,
   },
 ]);
 
