@@ -19,6 +19,7 @@ import {
 import InvoiceCreate, {
   loader as createInvoiceLoader,
 } from "./components/invoices1/InvoiceCreate";
+import UserList, {user_loader as clients} from "./modules/users/UserList";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,9 @@ const router = createBrowserRouter([
       { path: "upload/", element: <UploadFile /> },
     ],
   },
+  {path: '/users', element: <PrivateRoutes/>, loader: userLoader, children: [
+    {index: true, element: <UserList/>, loader: clients}
+  ]}
 ]);
 
 function App() {

@@ -4,7 +4,7 @@ import { account } from "../../../appwrite/config";
 import { useEffect } from "react";
 export const loader = async () => {
   try {
-    const userData = await account.get();
+    const userData = await account.get(); //admin
     return userData;
   } catch (error) {
     console.error(error);

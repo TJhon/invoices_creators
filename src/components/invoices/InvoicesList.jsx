@@ -31,15 +31,15 @@ export const InvoicesList = () => {
   const container = (
     <Container>
       <Typography variant="h1">Invoices</Typography>
-      <Grid container spacing={3}>
-        {listInvoices}
-      </Grid>
       <Button variant="contained" spacing={3} onClick={() => handleCreate()}>
         Crear Invoice
       </Button>
       <Button variant="contained" spacing={3} onClick={() => logout()}>
         Salir
       </Button>
+      <Grid container spacing={3}>
+        {listInvoices}
+      </Grid>
     </Container>
   );
 

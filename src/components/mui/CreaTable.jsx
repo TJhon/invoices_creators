@@ -20,18 +20,22 @@ export default function CreaTable({
           setValue({
             [search_in_object]: newValue,
           });
-          set_option(newValue);
-          console.log({ aqui: 12 });
+          set_option({
+            [search_in_object]: newValue,
+          });
+          // console.log({ aqui: 12 });
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
           setValue({
             [search_in_object]: newValue.inputValue,
           });
-          set_option(newValue.inputValue);
-          console.log({ aqui: 12 });
+          set_option({
+            [search_in_object]: newValue.inputValue,
+          });
         } else {
+          // select a existent option
           setValue(newValue);
-          set_option(newValue[search_in_object]);
+          set_option(newValue);
           // console.log({ aqui: 12 });
         }
       }}

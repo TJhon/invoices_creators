@@ -2,7 +2,9 @@ import { Select, MenuItem, Typography } from "@mui/material";
 import useInvoiceStore from "../store/store";
 import CreaTable from "../../mui/CreaTable";
 const GeneralInfo = ({ users }) => {
-  const { typeInvoice, setUserName, setTypeInvoice } = useInvoiceStore();
+  const { typeInvoice, setUserName, setTypeInvoice, userName } =
+    useInvoiceStore();
+  // console.log(userName);
 
   return (
     <>
@@ -18,7 +20,7 @@ const GeneralInfo = ({ users }) => {
         margin="dense"
         value={typeInvoice}
         fullWidth
-      onChange={(e) => setTypeInvoice(e.target.value)}
+        onChange={(e) => setTypeInvoice(e.target.value)}
       >
         <MenuItem value="Venta">Venta</MenuItem>
         <MenuItem value="Compra">Compra</MenuItem>

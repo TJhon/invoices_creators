@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { nanoid } from "nanoid";
 
 const useInvoiceStore = create((set) => ({
-  userName: "",
+  userName: {},
   typeInvoice: "Venta",
   items: [
     {

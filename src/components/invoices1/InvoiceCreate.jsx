@@ -46,20 +46,21 @@ const InvoiceCreate = () => {
     }
     const invoice_items = dropID(items);
     const invoice_payments = dropID(payments);
+    const { user_name } = userName;
 
-    console.log(payments);
     const payload = {
-      user_name: userName,
+      user_name,
       type_invoice: typeInvoice,
       invoice_items,
       invoice_payments,
       invoice_total,
       invoice_payment,
       items_photos,
-      users: { user_name: userName },
+      users: userName["$id"],
     };
+
     await db.invoice_main.create(payload);
-    // Lógica para enviar la factura
+
     navigate("/");
   };
   //   creamos el payload
