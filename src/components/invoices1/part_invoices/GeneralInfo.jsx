@@ -1,24 +1,24 @@
-import { TextField, Select, MenuItem, Typography } from "@mui/material";
+import { Select, MenuItem, Typography } from "@mui/material";
 import useInvoiceStore from "../store/store";
-
-const GeneralInfo = () => {
-  const { userName, typeInvoice, setUserName, setTypeInvoice } =
-    useInvoiceStore();
+import CreaTable from "../../mui/CreaTable";
+const GeneralInfo = ({ users }) => {
+  const { typeInvoice, setUserName, setTypeInvoice } = useInvoiceStore();
 
   return (
     <>
       <Typography variant="h4">Información general</Typography>
-      <TextField
-        onChange={(e) => setUserName(e.target.value)}
-        fullWidth
-        label="Nombre"
-        value={userName}
-        margin="normal"
+      <CreaTable
+        options_to_select={users}
+        search_in_object="user_name"
+        title_label="Nombre del usuario / Cliente"
+        set_option={setUserName}
       />
+
       <Select
+        margin="dense"
         value={typeInvoice}
         fullWidth
-        onChange={(e) => setTypeInvoice(e.target.value)}
+      onChange={(e) => setTypeInvoice(e.target.value)}
       >
         <MenuItem value="Venta">Venta</MenuItem>
         <MenuItem value="Compra">Compra</MenuItem>

@@ -12,6 +12,7 @@ import {
   Container,
   Button,
 } from "@mui/material";
+import { formatDate } from "../../utilities/utils";
 
 export const loader = async ({ params }) => {
   const invoice = await db.invoice_main.get(params.id);
@@ -84,7 +85,9 @@ const InvoiceDetails = () => {
           <TableBody>
             {payments.map((payment) => (
               <TableRow key={payment.$id}>
-                <TableCell align="right">{payment.$updatedAt}</TableCell>
+                <TableCell align="right">
+                  {formatDate(payment.$updatedAt)}
+                </TableCell>
                 <TableCell align="right">{payment.how_payed}</TableCell>
                 <TableCell align="right">{payment.who_received}</TableCell>
                 <TableCell align="right">{payment.payment}</TableCell>

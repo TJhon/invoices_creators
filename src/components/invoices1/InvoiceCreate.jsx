@@ -15,13 +15,20 @@ function dropID(arrayObjects) {
   });
   return result;
 }
+export async function loader() {
+  const { documents } = await db.users.list();
+  // const {}
+  const users = documents;
+  return { users };
+}
 
 const InvoiceCreate = () => {
   const navigate = useNavigate();
-  const { items, payments, userName, typeInvoice } = useInvoiceStore();
-  const [invoicePhotos, setInvoicePhotos] = useState(null);
   const { users } = useLoaderData();
-  console.log(users);
+  // console.log(users);
+  const { items, payments, userName, typeInvoice } = useInvoiceStore();
+
+  const [invoicePhotos, setInvoicePhotos] = useState(null);
 
   const invoice_total = items.reduce(
     (sum, item) => sum + item.item_price * item.item_qnt,
@@ -52,7 +59,6 @@ const InvoiceCreate = () => {
       users: { user_name: userName },
     };
     await db.invoice_main.create(payload);
-    // console.log(response);
     // Lógica para enviar la factura
     navigate("/");
   };
@@ -64,8 +70,8 @@ const InvoiceCreate = () => {
 
   return (
     <Container>
-      <Typography variant="h3">Crear Invoice</Typography>
-      <GeneralInfo />
+      <Typography variant="h3">Crear {typeInvoice}</Typography>
+      <GeneralInfo users={users} />
       <ItemList />
       <Typography>Total: S/. {invoice_total} </Typography>
       <div style={{ display: "flex" }}>

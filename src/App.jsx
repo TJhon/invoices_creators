@@ -16,7 +16,9 @@ import {
   loader as userLoader,
 } from "./pages/login/user/PrivateRoutes";
 
-import InvoiceCreate from "./components/invoices1/InvoiceCreate";
+import InvoiceCreate, {
+  loader as createInvoiceLoader,
+} from "./components/invoices1/InvoiceCreate";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: "invoice/create",
         element: <InvoiceCreate />,
-        loader: invoiceData,
+        loader: createInvoiceLoader,
       },
       {
         path: "invoice/edit/:id",
